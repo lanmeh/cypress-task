@@ -1,13 +1,10 @@
-import {
-  generateRandomNumber,
-  generateRandomString,
-} from "../../support/faker";
+import { generateRandomNumber, generateRandomString } from "../support/faker";
 
-describe("CRUD", () => {
+describe("Products", () => {
   let totalProducts: number;
 
   it("fetch all products", () => {
-    cy.request("GET", "https://dummyjson.com/products").then((response) => {
+    cy.request("GET", "/products").then((response) => {
       const { status, body } = response;
 
       expect(status).to.eq(200);
@@ -37,27 +34,25 @@ describe("CRUD", () => {
   it("fetch single product", () => {
     const randomProductID = generateRandomNumber(1, totalProducts);
 
-    cy.request("GET", `https://dummyjson.com/products/${randomProductID}`).then(
-      (response) => {
-        const { status, body } = response;
+    cy.request("GET", `/products/${randomProductID}`).then((response) => {
+      const { status, body } = response;
 
-        expect(status).to.eq(200);
-        expect(body.id, "Id should be a number").to.eq(randomProductID);
-        expect(body.title, "Title should be a string").to.be.a("string");
-        expect(body.description, "Description should be a string").to.be.a(
-          "string"
-        );
-        expect(body.category, "Category should be a string").to.be.a("string");
-        expect(body.price, "Price should be a number").to.be.a("number");
-        expect(
-          body.discountPercentage,
-          "Discount percentage should be a number"
-        ).to.be.a("number");
-        expect(body.rating, "Rating should be a number").to.be.a("number");
-        expect(body.stock, "Stock should be a number").to.be.a("number");
-        // Additional assertions can be added...
-      }
-    );
+      expect(status).to.eq(200);
+      expect(body.id, "Id should be a number").to.eq(randomProductID);
+      expect(body.title, "Title should be a string").to.be.a("string");
+      expect(body.description, "Description should be a string").to.be.a(
+        "string"
+      );
+      expect(body.category, "Category should be a string").to.be.a("string");
+      expect(body.price, "Price should be a number").to.be.a("number");
+      expect(
+        body.discountPercentage,
+        "Discount percentage should be a number"
+      ).to.be.a("number");
+      expect(body.rating, "Rating should be a number").to.be.a("number");
+      expect(body.stock, "Stock should be a number").to.be.a("number");
+      // Additional assertions can be added...
+    });
   });
 
   it("add product", () => {
@@ -65,7 +60,7 @@ describe("CRUD", () => {
     const randomStringCategory = generateRandomString();
     const randomNumberPrice = generateRandomNumber();
 
-    cy.request("POST", "https://dummyjson.com/products/add", {
+    cy.request("POST", "/products/add", {
       title: randomStringTitle,
       category: randomStringCategory,
       price: randomNumberPrice,
@@ -99,7 +94,7 @@ describe("CRUD", () => {
     const randomStringCategory = generateRandomString();
     const randomNumberPrice = generateRandomNumber();
 
-    cy.request("PUT", `https://dummyjson.com/products/${randomProductID}`, {
+    cy.request("PUT", `/products/${randomProductID}`, {
       title: randomStringTitle,
       category: randomStringCategory,
       price: randomNumberPrice,
@@ -130,10 +125,7 @@ describe("CRUD", () => {
   it("delete product", () => {
     const randomProductID = generateRandomNumber(1, totalProducts);
 
-    cy.request(
-      "DELETE",
-      `https://dummyjson.com/products/${randomProductID}`
-    ).then((response) => {
+    cy.request("DELETE", `/products/${randomProductID}`).then((response) => {
       const { status, body } = response;
 
       expect(status).to.eq(200);

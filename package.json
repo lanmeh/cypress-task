@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "open": "npx cypress open"
+    "dev": "env-cmd -e dev cypress run",
+    "dev-ui": "env-cmd -e dev cypress open",
+    "stage": "env-cmd -e stage cypress run",
+    "stage-ui": "env-cmd -e stage cypress open",
+    "prod": "env-cmd -e prod cypress run",
+    "prod-ui": "env-cmd -e prod cypress open"
   },
   "author": "Milan Šubarević",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^9.3.0",
     "cypress": "^13.16.1",
+    "env-cmd": "^10.1.0",
     "typescript": "^5.7.2"
   }
 }
