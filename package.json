@@ -1,0 +1,16 @@
+{
+  "name": "cypress-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "open": "npx cypress open"
+  },
+  "author": "Milan Šubarević",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^9.3.0",
+    "cypress": "^13.16.1",
+    "typescript": "^5.7.2"
+  }
+}
