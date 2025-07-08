@@ -2,6 +2,8 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.BASE_URL,
+    
   },
+  failOnStatusCode: false
 });

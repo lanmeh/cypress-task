@@ -55,6 +55,18 @@ describe("Products", () => {
     });
   });
 
+  it("[Negative] Fetch single product", () => {
+    const randomProductID = generateRandomNumber(100000, 10000000);
+
+    cy.request("GET", `/products/${randomProductID}`).then((response) => {
+      console.log(response)
+      const { status, body } = response;
+
+      expect(status).to.eq(404)
+      expect(body.message).to.eq(`Product with id ${randomProductID} not found`)
+    });
+  });
+
   it("add product", () => {
     const randomStringTitle = generateRandomString();
     const randomStringCategory = generateRandomString();
